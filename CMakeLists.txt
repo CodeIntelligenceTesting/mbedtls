@@ -18,9 +18,13 @@
 
 # We specify a minimum requirement of 3.10.2, but for now use 3.5.1 here
 # until our infrastructure catches up.
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.16)
 
 include(CMakePackageConfigHelpers)
+
+# Needed for fuzz testing with cifuzz
+find_package(cifuzz)
+enable_fuzz_testing()
 
 # https://cmake.org/cmake/help/latest/policy/CMP0011.html
 # Setting this policy is required in CMake >= 3.18.0, otherwise a warning is generated. The OLD
@@ -414,3 +418,7 @@ if(NOT DISABLE_PACKAGE_CONFIG_AND_INSTALL)
         export(PACKAGE MbedTLS)
     endif()
 endif()
+
+# Adding fuzz tests
+add_fuzz_test(fuzztest_x509 cifuzz/fuzztest_x509.c)
+target_link_libraries(fuzztest_x509 mbedx509)

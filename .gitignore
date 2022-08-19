@@ -67,3 +67,9 @@ massif-*
 compile_commands.json
 # clangd index files
 /.cache/clangd/index/
+
+# Fuzz testing
+/.cifuzz-build/
+/.cifuzz-corpus/
+/CMakeUserPresets.json
+/fuzz_tests.tar.gz
