@@ -1,5 +1,9 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.16)
 project(POLARSSL C)
+
+# Needed for fuzz testing with cifuzz
+find_package(cifuzz)
+enable_fuzz_testing()
 
 enable_testing()
 
@@ -52,3 +56,7 @@ ADD_CUSTOM_TARGET(memcheck
     COMMAND tail -n1 memcheck.log | grep 'Memory checking results:' > /dev/null
     COMMAND rm -f memcheck.log
     )
+
+# Adding fuzz tests
+add_fuzz_test(fuzztest_x509 cifuzz/fuzztest_x509.c)
+target_link_libraries(fuzztest_x509 polarssl)

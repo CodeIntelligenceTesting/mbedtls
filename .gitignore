@@ -3,3 +3,12 @@ CMakeFiles
 CTestTestfile.cmake
 cmake_install.cmake
 Testing
+
+# Fuzz testing
+/.cifuzz-*/
+/CMakeUserPresets.json
+/fuzz_tests.tar.gz
+
+# Other
+/scripts/mbedtls_dev/__pycache__/
+/tests/scripts/__pycache__/
